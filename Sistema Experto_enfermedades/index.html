@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnóstico de Enfermedades</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Diagnóstico de Enfermedades</h1>
+    <p>
+      Responde con "si" o "no" a las siguientes preguntas sobre tus síntomas:
+    </p>
+
+    <script>
+      // Array de enfermedades
+      const enfermedades = [
+        {
+          nombre: "Resfriado común",
+          sintomas: ["Congestión nasal", "Tos", "Estornudos"],
+        },
+        {
+          nombre: "Gripe",
+          sintomas: ["Fiebre", "Dolor de garganta", "Fatiga"],
+        },
+        {
+          nombre: "Alergia",
+          sintomas: [
+            "Picazón en los ojos",
+            "Estornudos frecuentes",
+            "Congestión nasal",
+          ],
+        },
+        {
+          nombre: "Migraña",
+          sintomas: [
+            "Dolor de cabeza intenso",
+            "Sensibilidad a la luz",
+            "Náuseas",
+          ],
+        },
+        {
+          nombre: "Gastritis",
+          sintomas: ["Dolor abdominal", "Acidez estomacal", "Náuseas"],
+        },
+        {
+          nombre: "Insomnio",
+          sintomas: [
+            "Dificultad para conciliar el sueño",
+            "Despertar frecuente durante la noche",
+          ],
+        },
+        {
+          nombre: "Apendicitis",
+          sintomas: ["Dolor abdominal agudo", "Fiebre", "Vómitos"],
+        },
+        { nombre: "Anemia", sintomas: ["Fatiga", "Palidez", "Mareos"] },
+        {
+          nombre: "Estrés",
+          sintomas: [
+            "Dolor de cabeza",
+            "Tensión muscular",
+            "Problemas para dormir",
+          ],
+        },
+        {
+          nombre: "Infección de oído",
+          sintomas: ["Dolor de oído", "Fiebre", "Problemas de audición"],
+        },
+      ];
+
+      // Función para hacer preguntas y dar un diagnóstico
+      function hacerDiagnostico() {
+        let respuestas = {};
+
+        // Hacer preguntas
+        for (let i = 0; i < enfermedades.length; i++) {
+          for (let j = 0; j < enfermedades[i].sintomas.length; j++) {
+            let sintoma = enfermedades[i].sintomas[j];
+            if (!respuestas[sintoma]) {
+              let respuesta = prompt(`¿Tienes ${sintoma.toLowerCase()}?`);
+              respuestas[sintoma] = respuesta.toLowerCase() === "si";
+            }
+          }
+        }
+
+        // Hacer diagnóstico
+        let posiblesEnfermedades = enfermedades.filter((enfermedad) =>
+          enfermedad.sintomas.every((sintoma) => respuestas[sintoma])
+        );
+
+        // Mostrar resultado
+        if (posiblesEnfermedades.length > 0) {
+          let resultado = "Basado en tus síntomas, podrías tener:";
+          for (let i = 0; i < posiblesEnfermedades.length; i++) {
+            resultado += `\n- ${posiblesEnfermedades[i].nombre}`;
+          }
+          alert(resultado);
+        } else {
+          alert(
+            "No podemos hacer un diagnóstico claro. Consulta a un profesional de la salud."
+          );
+        }
+      }
+
+      // Llamar a la función al cargar la página
+      hacerDiagnostico();
+    </script>
+  </body>
+</html>
